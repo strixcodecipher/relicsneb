@@ -109,52 +109,19 @@ function NebulaTracker() {
     const minutesInCurrentCycle = (totalMinutesSinceRef % 20);
     const minutesToNext = 20 - minutesInCurrentCycle;
     
-    // Based on actual game rotation and current observations
-    // At reference (9PM EST): Sanctuary = Chest, Shrine = Ore
-    // Current game shows: Orc = Chest, Sanctuary = Ore (so we're in position 3)
-    // Next should be: Shrine = Chest, Arkeum = Ore (position 1)
-    
-    // Calculate the current pair based on the rotation cycle  
-    const rotationPosition = hourCycle % 4;
-    
-    let location1, location2, type1, type2;
-    
-    switch (rotationPosition) {
-      case 0: // Reference position: Sanctuary (Chest), Shrine (Ore) 
-        location1 = 'Sanctuary Seal';
-        location2 = 'Shrine of Devotion';
-        type1 = 'Chest';
-        type2 = 'Ore';
-        break;
-      case 1: // Next hour: Shrine (Chest), Arkeum (Ore)
-        location1 = 'Shrine of Devotion';
-        location2 = 'Arkeum Post';
-        type1 = 'Chest';
-        type2 = 'Ore';
-        break;
-      case 2: // Next hour: Arkeum (Chest), Orc (Ore) 
-        location1 = 'Arkeum Post';
-        location2 = 'Orc Village';
-        type1 = 'Chest';
-        type2 = 'Ore';
-        break;
-      case 3: // Current observed: Orc (Chest), Sanctuary (Ore)
-        location1 = 'Orc Village';
-        location2 = 'Sanctuary Seal';
-        type1 = 'Chest';
-        type2 = 'Ore';
-        break;
-    }
+    // Get the current rotation pattern
+    const rotationIndex = hourCycle % ROTATION_PATTERN.length;
+    const currentRotation = ROTATION_PATTERN[rotationIndex];
     
     const current = [
       {
-        location: location1,
-        type: type1,
+        location: currentRotation.location1,
+        type: currentRotation.type1,
         colorSet: colorSet
       },
       {
-        location: location2,
-        type: type2,
+        location: currentRotation.location2,
+        type: currentRotation.type2,
         colorSet: colorSet
       }
     ];
@@ -162,7 +129,8 @@ function NebulaTracker() {
     return {
       current,
       minutesToNext,
-      colorSet
+      colorSet,
+      rotationIndex
     };
   };
 
