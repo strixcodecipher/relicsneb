@@ -161,11 +161,49 @@ function NebulaTracker() {
   };
 
   const calculateFutureSpawns = (currentTime, minutesAhead1, minutesAhead2) => {
+    // For the next spawn, we need to check if we're crossing an hour boundary
     const nextTime = new Date(currentTime.getTime() + minutesAhead1 * 60 * 1000);
     const afterNextTime = new Date(currentTime.getTime() + minutesAhead2 * 60 * 1000);
     
-    const nextData = calculateSpawnData(nextTime);
-    const afterNextData = calculateSpawnData(afterNextTime);
+    // Check if the next spawn will be in a new hour (different rotation)
+    const currentHour = Math.floor((currentTime.getTime() - REFERENCE_TIME.getTime()) / (1000 * 60 * 60));
+    const nextHour = Math.floor((nextTime.getTime() - REFERENCE_TIME.getTime()) / (1000 * 60 * 60));
+    const afterNextHour = Math.floor((afterNextTime.getTime() - REFERENCE_TIME.getTime()) / (1000 * 60 * 60));
+    
+    let nextData, afterNextData;
+    
+    if (nextHour > currentHour) {
+      // We're crossing into the next hour, so rotation changes
+      nextData = calculateSpawnData(nextTime);
+    } else {
+      // Same hour, same locations, just new color set
+      const currentData = calculateSpawnData(currentTime);
+      const nextSpawnCycle = Math.floor(((nextTime.getTime() - REFERENCE_TIME.getTime()) / (1000 * 60)) % 60 / 20);
+      const nextColorSet = COLOR_SETS[nextSpawnCycle % COLOR_SETS.length];
+      
+      nextData = {
+        current: currentData.current.map(spawn => ({
+          ...spawn,
+          colorSet: nextColorSet
+        }))
+      };
+    }
+    
+    if (afterNextHour > nextHour) {
+      // Next rotation change
+      afterNextData = calculateSpawnData(afterNextTime);
+    } else {
+      // Same rotation as next spawn
+      const afterNextSpawnCycle = Math.floor(((afterNextTime.getTime() - REFERENCE_TIME.getTime()) / (1000 * 60)) % 60 / 20);
+      const afterNextColorSet = COLOR_SETS[afterNextSpawnCycle % COLOR_SETS.length];
+      
+      afterNextData = {
+        current: nextData.current.map(spawn => ({
+          ...spawn,
+          colorSet: afterNextColorSet
+        }))
+      };
+    }
     
     return [
       ...nextData.current,
