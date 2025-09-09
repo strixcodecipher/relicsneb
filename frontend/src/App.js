@@ -11,13 +11,13 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
 // Define the exact rotation pattern based on user's correction
-// Current (9:37 PM): Arkeum Post (Chest) + Orc Village (Ore)  
-// Next (10:00 PM): Arkeum Post (Ore) + Shrine of Devotion (Chest)
+// User sees currently: Different pattern in tracker vs what they expect
+// At 10:00 PM should be: Arkeum Post (Ore) + Shrine of Devotion (Chest)
 const ROTATION_PATTERN = [
-  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },            // Current (9PM hour)
-  { location1: 'Arkeum Post', type1: 'Ore', location2: 'Shrine of Devotion', type2: 'Chest' },    // Next (10PM hour) - Arkeum Ore + Shrine Chest
-  { location1: 'Shrine of Devotion', type1: 'Ore', location2: 'Sanctuary Seal', type2: 'Chest' },  // Following (11PM hour)
-  { location1: 'Sanctuary Seal', type1: 'Ore', location2: 'Orc Village', type2: 'Chest' }          // After (12AM hour)
+  { location1: 'Sanctuary Seal', type1: 'Ore', location2: 'Orc Village', type2: 'Chest' },          // Current pattern showing
+  { location1: 'Arkeum Post', type1: 'Ore', location2: 'Shrine of Devotion', type2: 'Chest' },     // 10PM: Arkeum Ore + Shrine Chest
+  { location1: 'Shrine of Devotion', type1: 'Ore', location2: 'Sanctuary Seal', type2: 'Chest' },  // 11PM 
+  { location1: 'Orc Village', type1: 'Ore', location2: 'Arkeum Post', type2: 'Chest' }             // 12AM
 ];
 
 const LOCATION_MAPS = {
