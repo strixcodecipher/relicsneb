@@ -126,21 +126,24 @@ function NebulaTracker() {
       }
     ];
     
-    // Calculate next spawn (in 20 minutes)
-    const nextTime = new Date(time.getTime() + minutesToNext * 60 * 1000);
-    const nextSpawnData = calculateSpawnData(nextTime);
-    
-    // Calculate spawn after next (in 40 minutes)
-    const afterNextTime = new Date(time.getTime() + (minutesToNext + 20) * 60 * 1000);
-    const afterNextSpawnData = calculateSpawnData(afterNextTime);
-    
     return {
       current,
-      next: [nextSpawnData.current[0], nextSpawnData.current[1]],
-      afterNext: [afterNextSpawnData.current[0], afterNextSpawnData.current[1]],
       minutesToNext,
       colorSet
     };
+  };
+
+  const calculateFutureSpawns = (currentTime, minutesAhead1, minutesAhead2) => {
+    const nextTime = new Date(currentTime.getTime() + minutesAhead1 * 60 * 1000);
+    const afterNextTime = new Date(currentTime.getTime() + minutesAhead2 * 60 * 1000);
+    
+    const nextData = calculateSpawnData(nextTime);
+    const afterNextData = calculateSpawnData(afterNextTime);
+    
+    return [
+      ...nextData.current,
+      ...afterNextData.current
+    ];
   };
 
   useEffect(() => {
