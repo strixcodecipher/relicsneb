@@ -101,9 +101,11 @@ function NebulaTracker() {
     const timeDiff = time.getTime() - REFERENCE_TIME.getTime();
     const totalMinutesSinceRef = Math.floor(timeDiff / (1000 * 60));
     
-    // Locations rotate every HOUR (after 3 spawns at same locations)
-    const hoursSinceRef = Math.floor(totalMinutesSinceRef / 60);
-    const rotationIndex = hoursSinceRef % ROTATION_PATTERN.length;
+    // Since user observed Orc Village + Sanctuary Seal at 9PM hour, 
+    // but our reference was Sanctuary + Shrine, we need to offset by 3 hours
+    // to align with the current observation pattern
+    const adjustedHours = Math.floor(totalMinutesSinceRef / 60) + 3;
+    const rotationIndex = adjustedHours % ROTATION_PATTERN.length;
     
     // Within each hour, spawns happen every 20 minutes with different color sets
     const spawnCycle = Math.floor((totalMinutesSinceRef % 60) / 20);
