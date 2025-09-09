@@ -152,8 +152,10 @@ function NebulaTracker() {
       setCurrentTime(now);
       
       const spawnData = calculateSpawnData(now);
+      const futureSpawns = calculateFutureSpawns(now, spawnData.minutesToNext, spawnData.minutesToNext + 20);
+      
       setCurrentSpawns(spawnData.current);
-      setNextSpawns([...spawnData.next, ...spawnData.afterNext]);
+      setNextSpawns(futureSpawns);
       setTimeToNext(spawnData.minutesToNext);
       setCurrentColorSet(spawnData.colorSet);
     }, 1000);
