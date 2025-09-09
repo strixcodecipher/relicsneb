@@ -14,11 +14,12 @@ const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 // 9PM hour: Sanctuary Seal (Ore) + Orc Village (Chest) 
 // 10PM hour: Sanctuary Seal (Chest) + Shrine of Devotion (Ore) [ACTUAL]
 // 11PM hour: Orc Village (Ore) + Arkeum Post (Chest) [ACTUAL 11:20 PM]
+// 12AM hour: Orc Village (Chest) + Sanctuary Seal (Ore) [ACTUAL 12:00 AM]
 const ROTATION_PATTERN = [
   { location1: 'Sanctuary Seal', type1: 'Ore', location2: 'Orc Village', type2: 'Chest' },         // 9PM hour
   { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }, // 10PM hour [ACTUAL]
   { location1: 'Orc Village', type1: 'Ore', location2: 'Arkeum Post', type2: 'Chest' },           // 11PM hour [ACTUAL 11:20 PM]
-  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }  // 12AM hour [PREDICTED]
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }         // 12AM hour [ACTUAL 12:00 AM]
 ];
 
 const LOCATION_MAPS = {
