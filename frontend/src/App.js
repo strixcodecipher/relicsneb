@@ -103,17 +103,18 @@ function NebulaTracker() {
     const minutesInCurrentCycle = (totalMinutesSinceRef % 20);
     const minutesToNext = 20 - minutesInCurrentCycle;
     
-    // Based on rotation diagram: Arkeum -> Orc -> Sanctuary -> Shrine -> repeat
+    // Based on actual game rotation and current observations
     // At reference (9PM EST): Sanctuary = Chest, Shrine = Ore
-    // This means at reference time we're in a specific position in the 4-location cycle
+    // Current game shows: Orc = Chest, Sanctuary = Ore (so we're in position 3)
+    // Next should be: Shrine = Chest, Arkeum = Ore (position 1)
     
-    // Calculate the current pair based on the rotation cycle
+    // Calculate the current pair based on the rotation cycle  
     const rotationPosition = hourCycle % 4;
     
     let location1, location2, type1, type2;
     
     switch (rotationPosition) {
-      case 0: // Reference position: Sanctuary (Chest), Shrine (Ore)
+      case 0: // Reference position: Sanctuary (Chest), Shrine (Ore) 
         location1 = 'Sanctuary Seal';
         location2 = 'Shrine of Devotion';
         type1 = 'Chest';
@@ -125,13 +126,13 @@ function NebulaTracker() {
         type1 = 'Chest';
         type2 = 'Ore';
         break;
-      case 2: // Next hour: Arkeum (Chest), Orc (Ore)
+      case 2: // Next hour: Arkeum (Chest), Orc (Ore) 
         location1 = 'Arkeum Post';
         location2 = 'Orc Village';
         type1 = 'Chest';
         type2 = 'Ore';
         break;
-      case 3: // Next hour: Orc (Chest), Sanctuary (Ore)
+      case 3: // Current observed: Orc (Chest), Sanctuary (Ore)
         location1 = 'Orc Village';
         location2 = 'Sanctuary Seal';
         type1 = 'Chest';
