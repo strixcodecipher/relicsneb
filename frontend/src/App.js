@@ -101,8 +101,8 @@ function NebulaTracker() {
     const totalMinutesSinceRef = Math.floor(timeDiff / (1000 * 60));
     
     // Adjust to ensure 10 PM shows Arkeum Post (Ore) + Shrine of Devotion (Chest)
-    // Current pattern showing doesn't match what user expects at 10 PM
-    const adjustedHours = Math.floor(totalMinutesSinceRef / 60) + 2; // Offset to get correct 10 PM pattern
+    // We want the 10 PM spawn (next hour) to be pattern index 1
+    const adjustedHours = Math.floor(totalMinutesSinceRef / 60);
     const rotationIndex = adjustedHours % ROTATION_PATTERN.length;
     
     // Within each hour, spawns happen every 20 minutes with different color sets
