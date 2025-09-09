@@ -269,27 +269,58 @@ function NebulaTracker() {
             <Timer className="w-6 h-6 text-orange-400" />
             Upcoming Spawns
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {[
               { spawns: nextSpawns.slice(0, 2), time: getNextSpawnTime(timeToNext), label: 'Next Spawn' },
               { spawns: nextSpawns.slice(2, 4), time: getNextSpawnTime(timeToNext + 20), label: 'Following Spawn' }
             ].map((group, groupIndex) => (
-              <div key={groupIndex} className="bg-gray-800 rounded-xl p-4 border border-gray-700">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-medium text-gray-200">{group.label}</h3>
-                  <span className="text-purple-400 font-medium">{group.time}</span>
+              <div key={groupIndex} className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
+                <div className="p-4 bg-gray-750 border-b border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold text-gray-200">{group.label}</h3>
+                    <span className="text-purple-400 font-medium">{group.time}</span>
+                  </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-6 p-4">
                   {group.spawns.map((spawn, index) => (
-                    <div key={index} className="flex items-center justify-between bg-gray-750 rounded-lg p-3 border border-gray-600">
-                      <span className="font-medium">{spawn.location}</span>
-                      <span className={`px-2 py-1 rounded text-sm ${
-                        spawn.type === 'Chest' 
-                          ? 'bg-yellow-500/20 text-yellow-400' 
-                          : 'bg-blue-500/20 text-blue-400'
-                      }`}>
-                        {spawn.type}
-                      </span>
+                    <div key={index} className="bg-gray-750 rounded-xl border border-gray-600 overflow-hidden">
+                      <div className="p-3 bg-gray-700 border-b border-gray-600">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-lg font-medium">{spawn.location}</h4>
+                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            spawn.type === 'Chest' 
+                              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
+                              : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                          }`}>
+                            {spawn.type}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="relative">
+                        <img 
+                          src={LOCATION_MAPS[spawn.location]} 
+                          alt={spawn.location}
+                          className="w-full h-48 object-cover"
+                        />
+                        {/* Future spawn point overlays - showing predicted color set */}
+                        <div className="absolute inset-0">
+                          {SPAWN_COORDINATES[spawn.location] && 
+                           SPAWN_COORDINATES[spawn.location][spawn.colorSet] && 
+                           SPAWN_COORDINATES[spawn.location][spawn.colorSet].map((point, i) => (
+                            <div
+                              key={i}
+                              className={`absolute w-3 h-3 rounded-full border-2 border-white opacity-75 ${
+                                point.type === 'chest' ? 'bg-yellow-500' : 'bg-blue-500'
+                              }`}
+                              style={{
+                                left: `${point.x}%`,
+                                top: `${point.y}%`,
+                                transform: 'translate(-50%, -50%)'
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
