@@ -90,38 +90,64 @@ function NebulaTracker() {
 
   const calculateSpawnData = (time) => {
     const timeDiff = time.getTime() - REFERENCE_TIME.getTime();
-    const hoursSinceRef = Math.floor(timeDiff / (1000 * 60 * 60));
-    const minutesSinceRef = Math.floor(timeDiff / (1000 * 60));
+    const totalMinutesSinceRef = Math.floor(timeDiff / (1000 * 60));
     
-    // Each hour rotates to next location in cycle
-    const locationRotation = Math.floor(hoursSinceRef / 1) % LOCATION_CYCLE.length;
+    // Each hour (60 minutes) rotates the cycle
+    const hourCycle = Math.floor(totalMinutesSinceRef / 60);
     
     // Within each hour, spawns happen every 20 minutes (3 times per hour)
-    const spawnCycle = Math.floor((minutesSinceRef % 60) / 20);
+    const spawnCycle = Math.floor((totalMinutesSinceRef % 60) / 20);
     const colorSet = COLOR_SETS[spawnCycle % COLOR_SETS.length];
     
     // Minutes until next spawn (0-19 minutes into each 20-minute cycle)
-    const minutesInCurrentCycle = (minutesSinceRef % 20);
+    const minutesInCurrentCycle = (totalMinutesSinceRef % 20);
     const minutesToNext = 20 - minutesInCurrentCycle;
     
-    // Calculate current active locations
-    const sanctuaryIndex = (REFERENCE_SANCTUARY_INDEX + locationRotation) % LOCATION_CYCLE.length;
-    const shrineIndex = (REFERENCE_SHRINE_INDEX + locationRotation) % LOCATION_CYCLE.length;
+    // Based on rotation diagram: Arkeum -> Orc -> Sanctuary -> Shrine -> repeat
+    // At reference (9PM EST): Sanctuary = Chest, Shrine = Ore
+    // This means at reference time we're in a specific position in the 4-location cycle
     
-    // At reference time: Sanctuary = Chest, Shrine = Ore
-    // Each hour they alternate
-    const sanctuaryType = (hoursSinceRef % 2 === 0) ? 'Chest' : 'Ore';
-    const shrineType = (hoursSinceRef % 2 === 0) ? 'Ore' : 'Chest';
+    // Calculate the current pair based on the rotation cycle
+    const rotationPosition = hourCycle % 4;
+    
+    let location1, location2, type1, type2;
+    
+    switch (rotationPosition) {
+      case 0: // Reference position: Sanctuary (Chest), Shrine (Ore)
+        location1 = 'Sanctuary Seal';
+        location2 = 'Shrine of Devotion';
+        type1 = 'Chest';
+        type2 = 'Ore';
+        break;
+      case 1: // Next hour: Shrine (Chest), Arkeum (Ore)
+        location1 = 'Shrine of Devotion';
+        location2 = 'Arkeum Post';
+        type1 = 'Chest';
+        type2 = 'Ore';
+        break;
+      case 2: // Next hour: Arkeum (Chest), Orc (Ore)
+        location1 = 'Arkeum Post';
+        location2 = 'Orc Village';
+        type1 = 'Chest';
+        type2 = 'Ore';
+        break;
+      case 3: // Next hour: Orc (Chest), Sanctuary (Ore)
+        location1 = 'Orc Village';
+        location2 = 'Sanctuary Seal';
+        type1 = 'Chest';
+        type2 = 'Ore';
+        break;
+    }
     
     const current = [
       {
-        location: LOCATION_CYCLE[sanctuaryIndex],
-        type: sanctuaryType,
+        location: location1,
+        type: type1,
         colorSet: colorSet
       },
       {
-        location: LOCATION_CYCLE[shrineIndex],
-        type: shrineType,
+        location: location2,
+        type: type2,
         colorSet: colorSet
       }
     ];
