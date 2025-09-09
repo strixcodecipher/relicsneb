@@ -11,13 +11,13 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
 // Define the exact rotation pattern following the arrows in the diagram
-// Current: Sanctuary + Shrine
-// Following arrows: Sanctuary→Shrine (current) → Shrine→Arkeum (next) → Arkeum→Orc → Orc→Sanctuary
+// Current observation: Orc Village + Sanctuary Seal (Orc→Sanctuary pairing)
+// Following arrows: Orc→Sanctuary (current) → Sanctuary→Shrine (next) → Shrine→Arkeum → Arkeum→Orc
 const ROTATION_PATTERN = [
-  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' },  // Current (9PM)
-  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },     // Next (10PM) - Shrine→Arkeum
-  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },            // Following (11PM) - Arkeum→Orc  
-  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }          // After (12AM) - Orc→Sanctuary
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' },          // Current (9PM) - Orc→Sanctuary
+  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' },  // Next (10PM) - Sanctuary→Shrine
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },     // Following (11PM) - Shrine→Arkeum
+  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' }             // After (12AM) - Arkeum→Orc
 ];
 
 const LOCATION_MAPS = {
