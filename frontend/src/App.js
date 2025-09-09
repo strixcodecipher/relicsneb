@@ -10,14 +10,14 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 // User currently sees Orc Village + Sanctuary Seal, so let's set this as our reference
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
-// Define the exact rotation pattern based on what user is currently observing
-// User confirms: currently seeing Orc Village + Sanctuary Seal (9PM hour)
-// Next hour (10PM) will be Shrine of Devotion + Arkeum Post
+// Define the exact rotation pattern following the arrows in the diagram
+// Current: Sanctuary + Shrine
+// Following arrows: Sanctuary→Shrine (current) → Shrine→Arkeum (next) → Arkeum→Orc → Orc→Sanctuary
 const ROTATION_PATTERN = [
-  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' },         // 9PM hour (current observation)
-  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },    // 10PM hour (next rotation)
-  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },           // 11PM hour
-  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }  // 12AM hour
+  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' },  // Current (9PM)
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },     // Next (10PM) - Shrine→Arkeum
+  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },            // Following (11PM) - Arkeum→Orc  
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }          // After (12AM) - Orc→Sanctuary
 ];
 
 const LOCATION_MAPS = {
