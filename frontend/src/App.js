@@ -11,10 +11,10 @@ const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
 // Define the exact rotation pattern based on game observation
 const ROTATION_PATTERN = [
-  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }, // Reference hour
-  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },      // Next hour  
-  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },           // Following hour
-  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }         // Current observed
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' },         // Current observed (9PM hour)
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },    // Next hour (10PM)
+  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },           // Following hour (11PM) 
+  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }  // Reference pattern (12AM)
 ];
 
 const LOCATION_MAPS = {
