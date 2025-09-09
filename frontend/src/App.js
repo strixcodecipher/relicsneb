@@ -10,14 +10,15 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 // User currently sees Orc Village + Sanctuary Seal, so let's set this as our reference
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
-// Define the exact rotation pattern based on actual game observations
+// Define the exact rotation pattern based on ACTUAL game observations
 // 9PM hour: Sanctuary Seal (Ore) + Orc Village (Chest) 
 // 10PM hour: Sanctuary Seal (Chest) + Shrine of Devotion (Ore) [ACTUAL]
+// 11PM hour: Orc Village (Ore) + Arkeum Post (Chest) [ACTUAL 11:20 PM]
 const ROTATION_PATTERN = [
   { location1: 'Sanctuary Seal', type1: 'Ore', location2: 'Orc Village', type2: 'Chest' },         // 9PM hour
   { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }, // 10PM hour [ACTUAL]
-  { location1: 'Arkeum Post', type1: 'Ore', location2: 'Shrine of Devotion', type2: 'Chest' },     // 11PM hour 
-  { location1: 'Orc Village', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' }             // 12AM hour
+  { location1: 'Orc Village', type1: 'Ore', location2: 'Arkeum Post', type2: 'Chest' },           // 11PM hour [ACTUAL 11:20 PM]
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }  // 12AM hour [PREDICTED]
 ];
 
 const LOCATION_MAPS = {
