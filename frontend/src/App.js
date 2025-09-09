@@ -10,15 +10,14 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 // User currently sees Orc Village + Sanctuary Seal, so let's set this as our reference
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
-// Define the exact rotation pattern based on game mechanics
-// Reference: 9PM = Sanctuary Seal (Chest) + Shrine of Devotion (Ore) [from original reference]
-// But user observed: currently showing Orc Village + Sanctuary Seal
-// This suggests we need to offset the pattern
+// Define the exact rotation pattern based on what user is currently observing
+// User confirms: currently seeing Orc Village + Sanctuary Seal (9PM hour)
+// Next hour (10PM) will be Shrine of Devotion + Arkeum Post
 const ROTATION_PATTERN = [
-  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }, // 9PM reference hour
-  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },    // 10PM hour  
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' },         // 9PM hour (current observation)
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },    // 10PM hour (next rotation)
   { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },           // 11PM hour
-  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }         // 12AM hour (what user sees now)
+  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }  // 12AM hour
 ];
 
 const LOCATION_MAPS = {
