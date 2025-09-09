@@ -8,8 +8,14 @@ const COLOR_SETS = ['blue', 'green', 'orange'];
 
 // Reference point: 9:00 PM EST on [date], Sanctuary Seal = Chest, Shrine of Devotion = Ore
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
-const REFERENCE_SANCTUARY_INDEX = 2; // Sanctuary Seal is index 2 in LOCATION_CYCLE
-const REFERENCE_SHRINE_INDEX = 3; // Shrine of Devotion is index 3 in LOCATION_CYCLE
+
+// Define the exact rotation pattern based on game observation
+const ROTATION_PATTERN = [
+  { location1: 'Sanctuary Seal', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' }, // Reference hour
+  { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Arkeum Post', type2: 'Ore' },      // Next hour  
+  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Orc Village', type2: 'Ore' },           // Following hour
+  { location1: 'Orc Village', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' }         // Current observed
+];
 
 const LOCATION_MAPS = {
   'Arkeum Post': 'https://customer-assets.emergentagent.com/job_77f18dde-01c0-4d56-8de3-e0dc7f018ba0/artifacts/tdeko8xu_image.png',
