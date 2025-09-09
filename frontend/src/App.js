@@ -102,9 +102,9 @@ function NebulaTracker() {
     const totalMinutesSinceRef = Math.floor(timeDiff / (1000 * 60));
     
     // Since user observed Orc Village + Sanctuary Seal at 9PM hour, 
-    // but our reference was Sanctuary + Shrine, we need to offset by 3 hours
-    // to align with the current observation pattern
-    const adjustedHours = Math.floor(totalMinutesSinceRef / 60) + 3;
+    // we need to offset to align with current observation
+    // Pattern 0 = Orc Village + Sanctuary Seal (what user sees now)
+    const adjustedHours = Math.floor(totalMinutesSinceRef / 60);
     const rotationIndex = adjustedHours % ROTATION_PATTERN.length;
     
     // Within each hour, spawns happen every 20 minutes with different color sets
