@@ -6,7 +6,8 @@ const LOCATION_CYCLE = ['Arkeum Post', 'Orc Village', 'Sanctuary Seal', 'Shrine 
 const SPAWN_TYPES = ['Chest', 'Ore'];
 const COLOR_SETS = ['blue', 'green', 'orange'];
 
-// Reference point: 9:00 PM EST on [date], Sanctuary Seal = Chest, Shrine of Devotion = Ore
+// Reference point adjusted to match current observation
+// User currently sees Orc Village + Sanctuary Seal, so let's set this as our reference
 const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 
 // Define the exact rotation pattern based on game mechanics
