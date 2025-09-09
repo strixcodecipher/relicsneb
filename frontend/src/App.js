@@ -99,37 +99,17 @@ function NebulaTracker() {
     const timeDiff = time.getTime() - REFERENCE_TIME.getTime();
     const totalMinutesSinceRef = Math.floor(timeDiff / (1000 * 60));
     
-    // Calculate how many 20-minute cycles have passed since reference
-    const total20MinCycles = Math.floor(totalMinutesSinceRef / 20);
+    // Locations rotate every HOUR (after 3 spawns at same locations)
+    const hoursSinceRef = Math.floor(totalMinutesSinceRef / 60);
+    const rotationIndex = hoursSinceRef % ROTATION_PATTERN.length;
     
-    // Within current 20-minute cycle
+    // Within each hour, spawns happen every 20 minutes with different color sets
     const spawnCycle = Math.floor((totalMinutesSinceRef % 60) / 20);
     const colorSet = COLOR_SETS[spawnCycle % COLOR_SETS.length];
     
     // Minutes until next spawn (0-19 minutes into each 20-minute cycle)
     const minutesInCurrentCycle = (totalMinutesSinceRef % 20);
     const minutesToNext = 20 - minutesInCurrentCycle;
-    
-    // Based on user feedback: rotate every 3 cycles (every hour) starting from current observation
-    // But if we're at minute 40 of the hour (next spawn), advance to next rotation
-    const currentHourMinute = totalMinutesSinceRef % 60;
-    
-    let rotationIndex;
-    if (currentHourMinute >= 40) {
-      // We're in the last 20 minutes of the hour, so next spawn should be next rotation
-      const hoursSinceRef = Math.floor(totalMinutesSinceRef / 60);
-      rotationIndex = (hoursSinceRef + 1) % ROTATION_PATTERN.length;
-    } else if (currentHourMinute >= 20) {
-      // We're in the middle 20 minutes, check if this should advance rotation
-      const hoursSinceRef = Math.floor(totalMinutesSinceRef / 60);
-      // If user says next should be Shrine+Arkeum, and we're currently showing Orc+Sanctuary
-      // Then at minute 20-39, we should advance to next rotation
-      rotationIndex = (hoursSinceRef + 1) % ROTATION_PATTERN.length;
-    } else {
-      // First 20 minutes of hour
-      const hoursSinceRef = Math.floor(totalMinutesSinceRef / 60);
-      rotationIndex = hoursSinceRef % ROTATION_PATTERN.length;
-    }
     
     const currentRotation = ROTATION_PATTERN[rotationIndex];
     
