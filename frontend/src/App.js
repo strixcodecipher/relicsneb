@@ -13,7 +13,7 @@ const REFERENCE_TIME = new Date('2025-01-16T21:00:00-05:00'); // 9:00 PM EST
 // Define the exact rotation pattern to get correct 10 PM prediction
 // 10:00 PM MUST be: Arkeum Post (Ore) + Shrine of Devotion (Chest)
 const ROTATION_PATTERN = [
-  { location1: 'Arkeum Post', type1: 'Chest', location2: 'Shrine of Devotion', type2: 'Ore' },     // Some pattern
+  { location1: 'Arkeum Post', type1: 'Ore', location2: 'Shrine of Devotion', type2: 'Chest' },     // Current pattern  
   { location1: 'Arkeum Post', type1: 'Ore', location2: 'Shrine of Devotion', type2: 'Chest' },     // 10PM: Arkeum Ore + Shrine Chest
   { location1: 'Shrine of Devotion', type1: 'Chest', location2: 'Sanctuary Seal', type2: 'Ore' },  // 11PM
   { location1: 'Sanctuary Seal', type1: 'Ore', location2: 'Orc Village', type2: 'Chest' }          // 12AM
