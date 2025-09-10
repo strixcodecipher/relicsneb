@@ -166,6 +166,16 @@ function NebulaTracker() {
       setCurrentColorSet(spawnData.colorSet);
     }, 1000);
 
+    // Initialize immediately
+    const now = new Date();
+    const spawnData = calculateSpawnData(now);
+    const futureSpawns = calculateFutureSpawns(now, spawnData.minutesToNext, spawnData.minutesToNext + 20);
+    setCurrentTime(now);
+    setCurrentSpawns(spawnData.current);
+    setNextSpawns(futureSpawns);
+    setTimeToNext(spawnData.minutesToNext);
+    setCurrentColorSet(spawnData.colorSet);
+
     return () => clearInterval(interval);
   }, []);
 
