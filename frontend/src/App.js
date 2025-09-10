@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Clock, MapPin, Timer, Zap } from 'lucide-react';
 
+// Pure Frontend Nebula Relics Spawn Tracker
+// All spawn calculations run in the browser - perfect for GitHub Pages!
+
 const LOCATION_CYCLE = ['Arkeum Post', 'Orc Village', 'Sanctuary Seal', 'Shrine of Devotion'];
 const SPAWN_TYPES = ['Chest', 'Ore'];
 const COLOR_SETS = ['blue', 'green', 'orange'];
